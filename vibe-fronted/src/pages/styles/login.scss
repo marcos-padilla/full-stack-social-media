@@ -1,0 +1,66 @@
+.login {
+	height: 100vh;
+	background: linear-gradient(rgb(160, 96, 255), rgb(0, 228, 227));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.card {
+		display: flex;
+		background-color: white;
+		width: 70%;
+		border-radius: 10px;
+		min-height: 600px;
+		overflow: hidden;
+
+		.left {
+			flex: 1;
+			background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+				url('https://images.pexels.com/photos/4353618/pexels-photo-4353618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+					center;
+			background-size: cover;
+			padding: 50px;
+			display: flex;
+			flex-direction: column;
+			gap: 30px;
+			color: white;
+			div.logo-img {
+				display: flex;
+				justify-content: center;
+				place-items: center;
+				img {
+					max-width: 300px;
+				}
+			}
+
+			span {
+				font-size: 14px;
+			}
+			button {
+				width: 50%;
+				padding: 10px;
+				border: none;
+				font-weight: bold;
+				text-decoration: none;
+			}
+		}
+		.right {
+			flex: 1;
+			padding: 50px;
+			display: flex;
+			flex-direction: column;
+			gap: 50px;
+			justify-content: center;
+			h1 {
+				color: rgb(160, 96, 255);
+				font-size: 4rem;
+				text-align: center;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 30px;
+			}
+		}
+	}
+}
