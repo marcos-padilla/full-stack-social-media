@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { useAuthContext } from '../context/AuthProvider'
+
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
 	borderRadius: theme.shape.borderRadius,
@@ -56,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	},
 }))
 
-export default function Navbar() {
+export default function Navbar({ toggleStatus }) {
 	const [anchorEl, setAnchorEl] = useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
 	const { user, logout } = useAuthContext()
@@ -163,7 +164,7 @@ export default function Navbar() {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position='fixed'>
+			<AppBar position='sticky'>
 				<Toolbar>
 					<IconButton
 						size='large'
@@ -171,6 +172,7 @@ export default function Navbar() {
 						color='inherit'
 						aria-label='open drawer'
 						sx={{ mr: 2 }}
+						onClick={toggleStatus}
 					>
 						<MenuIcon />
 					</IconButton>
