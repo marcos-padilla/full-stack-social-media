@@ -5,7 +5,7 @@ import { TextField, InputAdornment, Button } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import KeyIcon from '@mui/icons-material/Key'
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { API_URL } from '../utils/constants'
 import { useAuthContext } from '../context/AuthProvider'
 import { useNavigate } from 'react-router-dom'
@@ -13,8 +13,14 @@ import { useNavigate } from 'react-router-dom'
 export default function Login() {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const { login } = useAuthContext()
+	const { login, user } = useAuthContext()
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (user) {
+			navigate('/')
+		}
+	}, [user])
 
 	const handleLogin = async () => {
 		axios
@@ -36,7 +42,6 @@ export default function Login() {
 						user: resp.data.user,
 						token: resp.data.token,
 					})
-					navigate('/')
 				}
 			})
 			.catch((error) => {
