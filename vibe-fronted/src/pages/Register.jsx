@@ -1,18 +1,23 @@
-import './styles/login.scss'
+import './styles/register.scss'
 import Logo from '../assets/logo_aumented.png'
 import { Link } from 'react-router-dom'
 import { TextField, InputAdornment, Button } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import KeyIcon from '@mui/icons-material/Key'
+import BadgeIcon from '@mui/icons-material/Badge'
+import EmailIcon from '@mui/icons-material/Email'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../utils/constants'
 import { useAuthContext } from '../context/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Register() {
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
+	const [passwordConfirmation, setPasswordConfirmation] = useState('')
 	const [error, setError] = useState('')
 
 	const { login, user } = useAuthContext()
@@ -24,37 +29,39 @@ export default function Login() {
 		}
 	}, [user])
 
-	const handleLogin = async () => {
+	const handleLogin = async (e) => {
+		e.preventDefault()
+
 		axios
 			.post(
-				`${API_URL}/login`,
+				`${API_URL}/register`,
 				{
-					username,
-					password,
+					name: name,
+					email: email,
+					username: username,
+					password: password,
+					password_confirmation: passwordConfirmation,
 				},
 				{
 					headers: {
 						'Content-Type': 'multipart/form-data',
+						Accept: 'application/json',
 					},
 				}
 			)
 			.then((resp) => {
 				if (resp.data.success) {
-					login({
-						user: resp.data.user,
-						token: resp.data.token,
-					})
-				} else {
-					setError('Las credenciales no coinciden')
+					login({ user: resp.data.user, token: resp.data.token })
+					navigate('/')
 				}
 			})
 			.catch((error) => {
-				console.log(error)
+				setError(error.response.data.message)
 			})
 	}
 
 	return (
-		<div className='login'>
+		<div className='register'>
 			<div className='card'>
 				<div className='left'>
 					<div className='logo-img'>
@@ -62,17 +69,44 @@ export default function Login() {
 					</div>
 					<p>
 						Bienvenido a <strong>VIBE</strong>. La red social que estabas
-						buscando, donde se resuleven todso tus problemas. Na mentira, es que
-						no se que escribr aqui y estoy realmente apurado
+						buscando, donde se resuleven todso tus problemas. Oye, dime que te
+						parece el logo que me cree
 					</p>
-					<span>No tienes cuenta?</span>
-					<Link to='/register'>
-						<Button variant='contained'>Registrate</Button>
+					<span>Ya tienes cuenta?</span>
+					<Link to='/login'>
+						<Button variant='contained'>Login</Button>
 					</Link>
 				</div>
 				<div className='right'>
-					<h1>Login</h1>
+					<h1>Register</h1>
 					<form>
+						<TextField
+							label='Name'
+							variant='outlined'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<BadgeIcon />
+									</InputAdornment>
+								),
+							}}
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+						<TextField
+							label='Email'
+							type='email'
+							variant='outlined'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<EmailIcon />
+									</InputAdornment>
+								),
+							}}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
 						<TextField
 							label='Username'
 							variant='outlined'
@@ -100,6 +134,20 @@ export default function Login() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
+						<TextField
+							label='Password Confirmation'
+							variant='outlined'
+							type='password'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<KeyIcon />
+									</InputAdornment>
+								),
+							}}
+							value={passwordConfirmation}
+							onChange={(e) => setPasswordConfirmation(e.target.value)}
+						/>
 						{error && (
 							<div
 								style={{
@@ -112,7 +160,7 @@ export default function Login() {
 							</div>
 						)}
 						<Button variant='contained' onClick={handleLogin}>
-							Login
+							Registrate
 						</Button>
 					</form>
 				</div>

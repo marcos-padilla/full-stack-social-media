@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import { AuthProvider, useAuthContext } from './context/AuthProvider'
 import Home from './pages/Home'
+import Register from './pages/Register'
 
 const ProtectedRoute = ({ children }) => {
 	const { user } = useAuthContext()
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
 	{
 		path: '/login',
 		element: <Login />,
+	},
+	{
+		path: '/register',
+		element: <Register />,
 	},
 ])
 
