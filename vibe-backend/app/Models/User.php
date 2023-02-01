@@ -47,4 +47,19 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function getProfilePhotoPathAttribute()
+    {
+
+        if ($this->attributes['profile_photo_path'] == null) {
+            return 'https://ui-avatars.com/api/?name=' . $this->attributes['name'];
+        } else {
+            return $this->attributes['profile_photo_path'];
+        }
+    }
+
+    public function getUsernameAttribute()
+    {
+        return '@' . $this->attributes['username'];
+    }
 }

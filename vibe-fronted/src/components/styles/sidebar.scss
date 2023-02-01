@@ -4,8 +4,41 @@
 	background-color: rgb(25, 118, 210);
 	transition: 0.5s ease-out;
 	box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.5);
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 
 	&.hide {
 		width: 0px;
+	}
+
+	.userInformation {
+		display: flex;
+		flex-direction: column;
+		place-items: center;
+		gap: 10px;
+		padding: 50px 0px;
+		cursor: pointer;
+		border-bottom: 1px solid darkgray;
+		span.name {
+			color: white;
+			font-size: 1.5rem;
+		}
+
+		.plus-data {
+			margin-top: 10px;
+			display: flex;
+			flex-direction: column;
+			place-items: center;
+
+			span {
+				color: white;
+				font-weight: bold;
+				font-size: 1.2rem;
+			}
+		}
 	}
 }

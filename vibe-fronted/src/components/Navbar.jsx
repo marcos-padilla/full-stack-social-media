@@ -223,7 +223,14 @@ export default function Navbar({ toggleStatus }) {
 							onClick={handleProfileMenuOpen}
 							color='inherit'
 						>
-							<AccountCircle />
+							<img
+								src={user.user.profile_photo_path}
+								style={{
+									borderRadius: 50,
+									width: '40px',
+									height: '40px',
+								}}
+							/>
 						</IconButton>
 					</Box>
 					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>
