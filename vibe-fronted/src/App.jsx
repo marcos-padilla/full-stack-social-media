@@ -8,7 +8,7 @@ import {
 	RouterProvider,
 } from 'react-router-dom'
 import { AuthProvider, useAuthContext } from './context/AuthProvider'
-import Home from './pages/Home'
+import Layout from './pages/Layout'
 import Register from './pages/Register'
 
 const ProtectedRoute = ({ children }) => {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<ProtectedRoute>
-				<Home />
+				<Layout />
 			</ProtectedRoute>
 		),
 	},

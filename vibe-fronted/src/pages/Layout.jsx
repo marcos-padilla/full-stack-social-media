@@ -1,9 +1,10 @@
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
-import './styles/home.scss'
+import './styles/layout.scss'
 import { useState } from 'react'
 import Box from '@mui/material/Box'
-export default function Home() {
+
+export default function Layout() {
 	const [sidebarStatus, setSidebarStatus] = useState(true)
 
 	const toggleStatus = () => {
@@ -11,7 +12,7 @@ export default function Home() {
 	}
 
 	return (
-		<div className='home'>
+		<div className='layout'>
 			<Sidebar status={sidebarStatus} />
 			<Box sx={{ flexGrow: 1 }}>
 				<Navbar toggleStatus={toggleStatus} />
