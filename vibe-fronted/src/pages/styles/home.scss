@@ -1,10 +1,16 @@
+@import '../../styles.scss';
+
 .home {
-	width: 100%;
-	display: flex;
-	.left {
-		flex: 2;
-	}
-	.right {
-		flex: 1;
+	@include themify($themes) {
+		padding: 20px 70px;
+		background-color: themed('bgSoft');
+		height: calc(100% - 40px);
+		@include mobile {
+			padding: 10px;
+		}
+
+		@include tablet {
+			padding: 20px;
+		}
 	}
 }

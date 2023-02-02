@@ -1,39 +1,48 @@
-import { Button } from '@mui/material'
-import TextField from '@mui/material/TextField'
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto'
-import IconButton from '@mui/material/IconButton'
+import './styles/postfield.scss'
+import Image from '../assets/img.png'
+import Map from '../assets/map.png'
+import Friend from '../assets/friend.png'
+import { useContext } from 'react'
+import { useAuthContext } from '../context/AuthProvider'
 
-export default function PostField() {
+const Share = () => {
+	const { user } = useAuthContext()
 	return (
-		<>
-			<TextField
-				style={{ width: '100%' }}
-				label='Que estas pensando...'
-				multiline
-				rows={5}
-				variant='filled'
-				inputProps={{ style: { fontSize: 25 } }}
-				InputLabelProps={{ style: { fontSize: 20 } }}
-			/>
-			<div
-				style={{
-					marginTop: 10,
-					display: 'flex',
-					justifyContent: 'space-between',
-				}}
-			>
-				<div>
-					<IconButton
-						color='primary'
-						aria-label='upload picture'
-						component='label'
-					>
-						<input hidden accept='image/*' type='file' />
-						<InsertPhotoIcon />
-					</IconButton>
+		<div className='postfield'>
+			<div className='container'>
+				<div className='top'>
+					<img src={user.user.profile_photo_path} alt='' />
+					<input
+						type='text'
+						placeholder={`Que tienes en mente ${user.user.name}?`}
+					/>
 				</div>
-				<Button variant='contained'>Publicar</Button>
+				<hr />
+				<div className='bottom'>
+					<div className='left'>
+						<input type='file' id='file' style={{ display: 'none' }} />
+						<label htmlFor='file'>
+							<div className='item'>
+								<img src={Image} alt='' />
+								<span>Add Image</span>
+							</div>
+						</label>
+						<div className='item'>
+							<img src={Map} alt='' />
+							<span>Add Place</span>
+						</div>
+						<div className='item'>
+							<img src={Friend} alt='' />
+							<span>Tag Friends</span>
+						</div>
+					</div>
+					<div className='right'>
+						<button>Share</button>
+					</div>
+				</div>
 			</div>
-		</>
+		</div>
 	)
 }
+
+export default Share

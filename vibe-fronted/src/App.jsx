@@ -1,15 +1,18 @@
-import Login from './pages/Login'
-import './index.css'
-
 import {
 	createBrowserRouter,
 	Navigate,
 	Outlet,
 	RouterProvider,
 } from 'react-router-dom'
+
 import { AuthProvider, useAuthContext } from './context/AuthProvider'
+import { DarkModeProvider, useDarkModeContext } from './context/DarkModeProvide'
+
+import Login from './pages/Login'
 import Layout from './pages/Layout'
 import Register from './pages/Register'
+import Home from './pages/Home'
+import Profile from './pages/Profile'
 
 const ProtectedRoute = ({ children }) => {
 	const { user } = useAuthContext()
@@ -27,6 +30,16 @@ const router = createBrowserRouter([
 				<Layout />
 			</ProtectedRoute>
 		),
+		children: [
+			{
+				path: '/',
+				element: <Home />,
+			},
+			{
+				path: '/profile/:id',
+				element: <Profile />,
+			},
+		],
 	},
 	{
 		path: '/login',
@@ -43,7 +56,9 @@ const secondaryColor = 'rgb(0,228,227)'
 export default function App() {
 	return (
 		<AuthProvider>
-			<RouterProvider router={router} />
+			<DarkModeProvider>
+				<RouterProvider router={router} />
+			</DarkModeProvider>
 		</AuthProvider>
 	)
 }

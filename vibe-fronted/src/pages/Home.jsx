@@ -1,13 +1,13 @@
 import PostField from '../components/PostField'
+import Posts from '../components/Posts'
+
 import './styles/home.scss'
 
 export default function Home() {
 	return (
 		<div className='home'>
-			<div className='left'>
-				<PostField />
-			</div>
-			<div className='right'></div>
+			<PostField />
+			<Posts />
 		</div>
 	)
 }

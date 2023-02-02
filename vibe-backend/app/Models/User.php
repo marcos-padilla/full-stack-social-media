@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return '@' . $this->attributes['username'];
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
