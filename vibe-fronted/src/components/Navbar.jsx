@@ -163,7 +163,7 @@ export default function Navbar({ toggleStatus }) {
 	)
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<>
 			<AppBar position='sticky'>
 				<Toolbar>
 					<IconButton
@@ -249,6 +249,6 @@ export default function Navbar({ toggleStatus }) {
 			</AppBar>
 			{renderMobileMenu}
 			{renderMenu}
-		</Box>
+		</>
 	)
 }

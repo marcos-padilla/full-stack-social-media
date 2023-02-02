@@ -1,3 +1,9 @@
 .home {
 	display: flex;
+	overflow: hidden;
+	.content {
+		background-color: rgb(220, 220, 220);
+		height: 100%;
+		display: flex;
+	}
 }
